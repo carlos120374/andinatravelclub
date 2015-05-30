@@ -1,0 +1,107 @@
+
+<%= form_for @tour, :html => { :class => "form-horizontal",  :multipart => true } do |f| %>
+  <% if @tour.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tour.errors.count, "error") %> prohibited this tour from being saved:</h2>
+
+      <ul>
+        <% @tour.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="row">
+  <div class="span8">
+    <div class="control-group">
+      <%= f.label :title ,:class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :title, :class => "input-xxlarge" %>  
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :subtitle ,:class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :subtitle, :class => "input-xxlarge" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :days ,:class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :days, :class => "input-xxlarge" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :nights ,:class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :nights, :class => "input-xxlarge" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :price ,:class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :price, :class => "input-xxlarge" %>
+      </div>
+    </div>    
+    <div class="control-group" style="margin-left: 160px;">
+      <label class="add-on" style="width: 345px;">
+        <%= f.check_box(:place, {:class => 'left', :style => "margin-right:10px;"}, "yes", "no") %>
+        Check para que aparezca solo en la página de destinos
+      </label>
+    </div>
+    <div class="control-group">
+      <%= f.label :interest ,:class => "control-label" %>
+      <div class="controls">
+        <%= f.select :interest_id, Interest.all.map {|interest| [interest.name,interest.id]}, {:include_blank => "No relacionado"} %>
+      </div>
+    </div>    
+    <div class="control-group">
+      <%= f.label :image ,:class => "control-label" %>
+      <div class="controls">
+        <%= f.file_field :image ,:class => "input-xlarge input-file" %>
+      </div>        
+    </div>
+    <div class="control-group">
+      <%= f.label :short_description ,:class => "control-label" %>
+      <div class="controls">
+        <%= f.text_area :short_description, :class => "input-xxlarge", :rows => 5 %>    
+      </div>  
+    </div>
+    <div class="control-group">
+      <%= f.label :short_itinerary, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_area :short_itinerary, :class => "input-xxlarge", :rows => 8 %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :itinerary ,:class => "control-label" %>
+      <div class="controls">
+        <%= f.text_area :itinerary, :class => "input-xxlarge", :rows => 10 %>
+      </div>
+    </div>    
+  </div>
+  <div class="span3">
+    <p>Para hacer formato con estilo se puede usar los siguientes comandos:</p>
+    <p>h1. Titulo</p>
+    <p>h2. Subtitulo</p>
+    <p>h3. Subtitulo Interno</p>
+    <p># Lista numerica</p>
+    <p>* Lista viñetas</p>
+    <p>_enfasis_</p>
+    <p>__italicas__</p>
+    <p>*fuerte*</p>
+    <p>**Negritas**</p>
+    <p>??cita??</p>
+    <p>-Texto negado-</p>
+    <p>+Insertar text+</p>
+    <p>^super indice^</p>
+    <p>~sub indice~</p>
+    <p>@codigo@</p>
+    <p>%(classname)span%</p>
+  </div>
+</div>
+  <div class="actions" style="margin-left: 160px;">
+    <%= f.submit :class => "btn btn-primary" %>
+    <a href="/tours" class="btn">Cancelar</a>
+  </div>
+<% end %>

@@ -1,0 +1,25 @@
+<div class="row clear" style="margin:0px;margin-top: 10px;margin-bottom: 20px;">
+  <div class="span6 dashed-right">
+    <h2>ANDINA TRAVEL CLUB</h2>
+    <p class="span5" style="text-align: justify;margin-left: 0px">
+      ANDINA TRAVEL CLUB conocedores de lo mucho que tenemos por dar a conocer busca a través de muchos años de experiencia acumulada dar a sus clientes lo que mejor conocemos, que es más que realizar una reserva, o comprar un ticket aéreo. Lo que ofrecemos a las personas va mucho más allá de una cotidiana intermediación. Nosotros brindamos la posibilidad de vivir “Experiencias Únicas”. Pensando en ello nuestra empresa ha ido formando en el tiempo cualidades que nos permiten que usted, nuestro cliente, haga un viaje que recuerde para toda la vida.        
+    </p>
+  </div>
+  <div class="span6">
+    <h3 style="margin-bottom: 10px;">Últimas entradas en el blog</h3>
+    <% if @last_post != nil then  %>
+      <articule><%= raw RedCloth.new(truncate(@last_post.preview.gsub(/<object.*object>/,""), :length => 648, :omission => "...")).to_html %></articule>
+      <%= link_to "Leer más", @last_post %>
+    <% end %>
+  </div>
+</div>
+<div style="margin-left: 20px;" class="clear">
+  <div class="footer-nav">
+    <ul>
+      <li>Sobre andinaTravelClub.com</li>      
+      <li><%= link_to "Términos y condiciones del servicio", :terms_and_condition %></li>
+      <li><%= link_to "Blog", posts_path %></li>
+    </ul>     
+  </div>
+  <div class="clear" style="margin-bottom: 20px;">Copyright © 2012 andinaTravelClub.com. Todos los derechos reservados.</div>
+</div>

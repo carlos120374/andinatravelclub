@@ -1,0 +1,90 @@
+<% if @current_account  %>
+<h1 style="float:left;">Tours</h1>
+<div style="float:right;margin-bottom: 10px;">
+  <%= link_to 'Nuevo Tour', new_tour_path, :class=> "btn btn-primary" %>
+</div>
+<div class="clear"></div>
+<table class="table table-striped">
+  <tr>
+    <th>Título</th>
+    <th>Subtitulo</th>
+    <th style="width: 100px;">Descripción corta</th>
+    <th style="width: 200px;">Itinerario corto</th>
+    <th>Itinerario largo</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tours.each do |tour| %>
+  <tr>
+    <td><%= tour.title %></td>
+    <td><%= tour.subtitle %></td>
+    <td><%= raw RedCloth.new(truncate(tour.short_description, :length => 50, :omission => "...")).to_html %></td>
+    <td><%= raw RedCloth.new(truncate(tour.short_itinerary, :length => 50, :omission => "...")).to_html %></td>
+    <td><%= raw RedCloth.new(truncate(tour.itinerary, :length => 50, :omission => "...")).to_html %></td>
+    <td><%= link_to 'Detalle', tour %></td>
+    <td><%= link_to 'Editar', edit_tour_path(tour) %></td>
+    <td><%= link_to 'Eliminar', tour, :confirm => 'Esta seguro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+<% else %>
+<% content_for :meta do %>
+    <meta name="description" content="Descubre nuestros paquetes turísticos organizados por destino e interés"/>
+    <title>Andina Travel Club - Paquetes turisticos por destino e interés</title>
+<% end %> 
+  <div class="tour-banner">
+    <% if @tour != nil then %>
+      <%= link_to @tour do %>
+        <%= image_tag @tour.image.url(:large) %>
+        <div class="promotion">
+          <h1><%= @tour.title %></h1>
+          <h2><%= @tour.subtitle %></h2>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="container" style="margin-bottom: 20px;">
+    <div class="rounded interest-header-container">
+      <h3>
+        <% if @interests %>
+          <% @interests.each do |interest| %>
+            <div class="interest-header interest-<%= interest.id %>"><%= interest.name %></div>
+          <% end %>
+        <% else %>
+          ¿Interesado en algo diferente?
+          <%= link_to "Descubre nuestros tours de interes",tours_by_interest_url %>       
+        <% end %>
+        <div class="clear"></div>
+      </h3>
+    </div>
+  </div>
+  <div class="row clear" style="margin:10px 0px;">
+    <div class="form-home form-paquetes" style="padding: 5px 10px;">
+      <ul class="thumbnails">
+        <% @tours.each do |tour| %>
+          <li class="span3">                        
+            <% if tour.interest and tour.place == false %>
+              <div class="thumbnail interest-back-<%= tour.interest.id %>" style="min-height: 240px;position: relative;">                
+            <% else %>
+              <div class="thumbnail" style="min-height: 240px;position: relative;">
+            <% end %>
+              <%= link_to tour do %>
+                <%= image_tag tour.image.url(:thumb) %>
+              <% end %>
+              <h5><%= link_to tour.title, tour, :style => "color: #333;" %></h5>
+              <p><%= tour.subtitle %></p>
+              <div class="info-days">
+                <div class="left">
+                  <%= tour.days %> días / <%= tour.nights %> noches
+                </div>
+                <div class="clear"></div>                
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>      
+    </div>    
+  </div>
+<% end %>

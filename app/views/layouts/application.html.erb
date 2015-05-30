@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <%= yield :meta %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <script type="text/javascript">        
+    WebFontConfig = { google: {families: [ 'Open Sans' ]} };
+    (function() {
+      var wf = document.createElement('script');
+      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+        '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+      wf.type = 'text/javascript';
+      wf.async = 'true';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(wf, s);
+    })();
+  </script>
+  <%= csrf_meta_tags %>
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-31507667-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>  
+</head>
+<body>
+    <%= render "shared/header" %>
+    <div class="container" style="position:relative">
+      <div class="andina-bg-monkey"></div>
+      <div class="andina-bg-bird"></div>
+      <div class="rounded" style="padding-top: 20px;">      
+        <%= yield %>            
+      </div>
+    </div>
+    <%= render "shared/footer_link" %>
+    <div class="andina-footer clear">
+      <div class="container">
+        <%= render "shared/footer" %>
+      </div>
+    </div>  
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <script>
+      if ( /Safari/.test(navigator.userAgent) ) {
+        $("body").addClass("safari");
+      }
+    </script>    
+    <%= yield :javascript %>    
+</body>
+</html>

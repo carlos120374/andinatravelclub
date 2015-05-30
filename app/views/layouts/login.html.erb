@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Andina Travel Club - Experiencias únicas en cada destino</title>
+      <%= stylesheet_link_tag 'login', media: 'all', 'data-turbolinks-track' => true %>
+      <%= csrf_meta_tag %>
+  </head>
+  <body>
+    <div class="navbar">      
+        <div class="navbar-inner">
+          <div class="container">
+            <a href="javascript:void(0);" class="brand">Andina travel club</a>
+          </div>
+        </div><!-- /topbar-inner -->
+    </div>
+
+    <div class="container">      
+      <%= yield %>    
+    </div>    
+  </body>
+</html>
